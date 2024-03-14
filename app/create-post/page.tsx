@@ -1,10 +1,11 @@
 "use client"
 
 import Image from "next/image";
-import { Input } from "@/components"
-import { useState } from "react";  
+
+import { FormEvent, useState } from "react";
 import React from "react";
- 
+import { TextArea, Button, Input } from "@/components"
+import axios from "axios";
 
 export default function Page() {
     const [post, setPost] = useState({
@@ -13,11 +14,19 @@ export default function Page() {
         tags: "",
         category: ""
     })
+    const handleSubmit = async () => {
+        let res = await axios.post('/api/blogs', post);
+
+        if (res.statusText == "OK") {
+            alert('successfully published');
+        }
+    }
 
     return (
-        <div>
+        <div className="max-w-[720px] m-auto">
             <form action="#" method="post">
                 <Input
+                    type="text"
                     label="Slug (Title)"
                     value={post.slug}
                     htmlFor="slug"
@@ -26,8 +35,8 @@ export default function Page() {
                         setPost({ ...post, slug: e.target.value });
                     }}
                 />
-                 
-                <Input
+
+                <TextArea
                     label="Description"
                     value={post.desc}
                     htmlFor="desc"
@@ -36,7 +45,38 @@ export default function Page() {
                         setPost({ ...post, desc: e.target.value });
                     }}
                 />
-                 
+
+                <Input
+                    type="text"
+                    label="Category"
+                    value={post.category}
+                    htmlFor="category"
+                    placeholder="category"
+                    onChange={(e) => {
+                        setPost({ ...post, category: e.target.value });
+                    }}
+                />
+                <Input
+                    type="text"
+                    label="Tags"
+                    value={post.tags}
+                    htmlFor="tags"
+                    placeholder="Enter comma separated tags"
+                    onChange={(e) => {
+                        setPost({ ...post, tags: e.target.value });
+                    }}
+                />
+
+                <div className="text-center py-2">
+                    <Button
+                        text="Publish"
+                        onClick={(e: any) => {
+                            e.preventDefault();
+                            handleSubmit();
+                        }}
+                    />
+                </div>
+
             </form>
         </div>
     );

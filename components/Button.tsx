@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 interface InputProps {
     text: string,
-    onClick: () => void,
+    onClick: (e: any) => void,
     className?: string,
 }
 

@@ -33,7 +33,7 @@ const TextArea: React.FC<InputProps> = ({
             </label>
             <textarea
                 value={value}
-                className={` p-1 border border-black border-opacity-25 rounded-sm focus: outline-none ${className}`}
+                className={` p-1 border-2 rounded-sm focus: outline-none ${className}`}
                 placeholder={placeholder ? placeholder : ""}
                 name={htmlFor}
                 onChange={onChange}
