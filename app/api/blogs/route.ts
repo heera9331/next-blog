@@ -15,13 +15,13 @@ export const GET = async (request: NextRequest) => {
   }
 };
 
-export const POST = async (request) => {
+export const POST = async (request:NextRequest) => {
   const body = await request.json();
 
   const newPost = new Post(body);
 
   try {
-    await connect();
+    await connectDB();
 
     await newPost.save();
 
