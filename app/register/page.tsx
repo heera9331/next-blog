@@ -23,7 +23,7 @@ const Page = () => {
             console.log(user);
             setLoading(true);
             timeout = setTimeout(() => { }, 2000);
-            let res = await axios.post(`/api/user`, user);
+            let res = await axios.post(`/api/users`, user);
             console.log(res);
             let data = res.data;
             setLoading(false);
@@ -32,9 +32,8 @@ const Page = () => {
                 alert(data.error);
             } else {
                 console.log(data);
-                // token, isAdmin, userId 
                 setLoading(false);
-                router.push("/home");
+                alert('you are registered, login now');
             }
         } catch (error) {
             setLoading(false);
