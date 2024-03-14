@@ -10,7 +10,7 @@ interface InputProps {
 const Button = ({ text, onClick, className, ...props }: InputProps) => {
     return (
         <button
-            className={`bg-secondary text-white rounded-sm py-1 px-2 hover:bg-blue-900 font-semibold ${className}`}
+            className={`bg-white border border-black border-opacity-25 rounded-sm px-2 py-1 font-semibold hover:bg-gray-100 ${className}`}
             type="button"
             {...props}
             onClick={onClick}
