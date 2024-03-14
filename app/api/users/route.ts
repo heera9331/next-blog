@@ -23,7 +23,7 @@ export const POST = async (request:NextRequest) => {
     await connectDB(); 
     await newUser.save();
 
-    return new NextResponse("Post has been created", { status: 201 });
+    return new NextResponse("User has been created", { status: 201 });
   } catch (err) {
     return new NextResponse("Database Error", { status: 500 });
   }
