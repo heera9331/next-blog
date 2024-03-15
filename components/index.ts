@@ -5,5 +5,7 @@ import Input from "./Input";
 import Loading from "./Loading";
 import TextArea from "./TextArea";
 import AuthProvider from "./AuthProvider";
+import CommentForm from "./CommentForm/CommentForm";
 
-export { Header, Footer, Button, Input, Loading, TextArea, AuthProvider };
+
+export { Header, Footer, Button, Input, Loading, TextArea, AuthProvider, CommentForm};
