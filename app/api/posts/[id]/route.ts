@@ -4,11 +4,11 @@ import { Post } from "@/models";
 
 export const GET = async (request: NextRequest, { params }: {params: object}) => {
   const { id } = params;
-
+  console.log(params);
   try {
     await connectDB();
 
-    const post = await Post.findById(id);
+    const post = await Post.findOne({slug: id});
 
     return new NextResponse(JSON.stringify(post), { status: 200 });
   } catch (err) {
