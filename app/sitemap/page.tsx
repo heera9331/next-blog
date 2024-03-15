@@ -12,6 +12,7 @@ export default function Page() {
                 <a href="/register" className="underline text-blue-800">Register</a>
                 <a href="/sitemap" className="underline text-blue-800">Sitemap</a>
                 <a href="/create-post" className="underline text-blue-800">Create post</a>
+                <a href="/profile" className="underline text-blue-800">Profile</a>
             </div>
         </div>
     )
