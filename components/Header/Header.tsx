@@ -2,8 +2,12 @@
 import { IoClose } from "react-icons/io5";
 import React, { useState } from "react"
 import { IoMenu } from "react-icons/io5";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "@/components";
+
 const Header: React.FC = () => {
     const [click, setClick] = useState(false);
+    const session = useSession();
 
     return (
         <header className="bg-gray-100 border-b border-black border-opacity-25 flex justify-between px-4 items-center py-3">
@@ -21,9 +25,18 @@ const Header: React.FC = () => {
                     <li className="bg-white border border-black border-opacity-25 rounded-sm px-2 py-1">
                         <a href="/register" className="font-semibold">Register</a>
                     </li >
-                    <li className="bg-white border border-black border-opacity-25 rounded-sm px-2 py-1">
+
+                    {session.status === "authenticated" ? <li className="bg-white border border-black border-opacity-25 rounded-sm px-2 py-1">
+                        <button
+                            onClick={() => signOut()}
+                            className="font-semibold"
+                        >
+                            Logout
+                        </button>
+                    </li> : <li className="bg-white border border-black border-opacity-25 rounded-sm px-2 py-1">
                         <a href="/login" className="font-semibold">Login</a>
-                    </li>
+                    </li>}
+
                 </ul>
                 {!click &&
                     <IoMenu className="text-2xl md:hidden"
