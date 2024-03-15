@@ -42,7 +42,7 @@ export default function Page() {
             setPost({ ...post, author: session.data?.user?.email })
         }
 
-    }, [session])
+    }, [session, post])
 
     if (session.status === "loading") {
         return <p>Loading...</p>;
