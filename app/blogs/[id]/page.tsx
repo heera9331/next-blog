@@ -8,7 +8,7 @@ import { CommentForm } from "@/components";
 
 
 async function getPost(id: string) {
-    const res = await axios.get(`http://localhost:3000/api/posts/${id}`);
+    const res = await axios.get(`/api/posts/${id}`);
 
     if (res.statusText != "OK") {
         return notFound()

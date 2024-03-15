@@ -4,7 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import { CgInsights } from "react-icons/cg";
 const getPosts = async () => {
   try {
-    let res = await axios.get('http://localhost:3000/api/posts?currentPage=1&pageSize=15');
+    let res = await axios.get('/api/posts?currentPage=1&pageSize=15');
     let posts = await res.data;
     return posts;
   } catch (error) {
