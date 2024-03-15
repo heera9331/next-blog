@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <Header />
-          <div className="min-h-[90vh] md:p-2">
+          <div className="min-h-[90vh] p-2">
             {children}
           </div>
           <Footer />
