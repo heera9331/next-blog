@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
-import { Header, Footer } from "@/components";
+import { Header, Footer, AuthProvider } from "@/components";
 
 export const metadata: Metadata = {
   title: "Next Blog",
@@ -18,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <div className="min-h-[90vh] md:p-2">
-          {children}
-        </div>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <div className="min-h-[90vh] md:p-2">
+            {children}
+          </div>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
