@@ -15,15 +15,17 @@ const handler = NextAuth({
             await connectDB();
 
             try {
-                const user = await User.findOne({
+                let user = await User.findOne({
                     username: credentials.username,
                 });
 
                 if (user) {
 
                     const isPasswordCorrect = credentials.password === user.password;
+                    
                     if (isPasswordCorrect) {
-                        return user;
+                        user = {email: user.username}; 
+                        return user
                     } else {
                         throw new Error("Wrong Credentials!");
                     }
