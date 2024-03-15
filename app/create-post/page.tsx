@@ -1,30 +1,64 @@
 "use client"
 
-import Image from "next/image";
-
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { TextArea, Button, Input } from "@/components"
 import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+    const session = useSession();
+    const router = useRouter();
+    console.log('session - ', session);
     const [post, setPost] = useState({
         slug: "",
         desc: "",
         tags: "",
-        category: ""
+        category: "",
+        author: ""
     })
-    const handleSubmit = async () => {
-        let res = await axios.post('/api/blogs', post);
 
-        if (res.statusText == "OK") {
-            alert('successfully published');
+    const handleSubmit = async () => {
+        console.log('blog to be publish ', post);
+
+        try {
+            let res = await axios.post('/api/posts', post);
+            console.log('got response ', res);
+
+            if (res.statusText == "Created") {
+                alert('successfully published');
+                router.push('/');
+            } else {
+                alert('something went wrong');
+            }
+        } catch (error) {
+            console.log('error while post a blog', error);
         }
     }
 
+    useEffect(() => {
+        if (session.data?.user?.email) {
+            setPost({ ...post, author: session.data?.user?.email })
+        }
+
+    }, [session])
+
+    if (session.status === "loading") {
+        return <p>Loading...</p>;
+    }
+
+    if (session.status === "unauthenticated") {
+        router?.push("/login");
+    }
+
+
     return (
         <div className="max-w-[720px] m-auto">
-            <form action="#" method="post">
+            <form method="post" onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+            }}>
                 <Input
                     type="text"
                     label="Slug (Title)"
@@ -67,14 +101,10 @@ export default function Page() {
                     }}
                 />
 
-                <div className="text-center py-2">
-                    <Button
-                        text="Publish"
-                        onClick={(e: any) => {
-                            e.preventDefault();
-                            handleSubmit();
-                        }}
-                    />
+                <div className="flex justify-center pt-2 flex-col items-center">
+                    <button className="bg-white border border-black border-opacity-25 rounded-sm px-2 py-1 font-semibold hover:bg-gray-100">
+                        Publish
+                    </button>
                 </div>
 
             </form>

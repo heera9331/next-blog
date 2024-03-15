@@ -19,9 +19,8 @@ const postSchema = new mongoose.Schema({
         type: String
     },
     author:{
-        type: mongoose.Types.ObjectId,
-        required: true,
-        ref: "user"
+        type: String,
+        required: true, 
     },
     views: {
         type: Number, default: 0
